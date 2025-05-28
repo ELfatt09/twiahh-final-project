@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile | TwiiAah  </title>
+
+  <!-- Logo -->
+   <link rel="icon" href="images/TwiiAhh Logo 2.svg" type="image/svg+xml">
+
+
+  <!-- CSS -->
+    <link rel="stylesheet" href="style.css">   
+    
+    <style>
+        .text-10px {
+            font-size: 10px;
+        }
+    </style>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css">
+  
+</head>
+<body class="bg-teritary font-sans overflow-y-hidden">
+
+   <!-- Navbar -->
+    <header class="w-full backdrop-blur-md bg-opacity-70">
+        <nav class="flex justify-center px-6 border-b border-primary py-4">
+
+            <!-- Search Bar -->
+           <div class="w-6/12 items-center justify-center">
+             <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+                    <i class="fas fa-search"></i>
+                </span>
+                    <input
+                    type="text"
+                    placeholder="Search..."
+                    class="w-full pl-10 pr-4 py-2 border border-primary rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition"
+                    />
+                </div>
+           </div>
+        </nav>
+    </header>
+
+        <div class="flex flex-row">
+
+            <!-- Burger -->
+             <button id="menu-toggle" class=" absolute top-4 left-4 z-50 p-2">
+                <i class="fas fa-bars text-primary text-2xl"></i>
+            </button>
+            <!-- Burger -->
+
+              <!-- Pop Up -->
+              <div id="modal" class="z-50 fixed backdrop-blur-md inset-0 hidden justify-center items-center px-4 md:px-0">
+                    <div class="flex justify-center items-center h-full w-full">
+                        <div class="bg-white shadow-lg rounded-lg w-full md:w-1/2 fade-in modal-content z-50 ">
+
+                            <div class="mb-4 border-b-2 border-primary pb-5 w-full">
+
+                                <div class="flex items-center pt-4 px-10 gap-6">
+                                <button id="closeModal">
+                                    <i class="fa-solid fa-right-from-bracket cursor-pointer text-xl text-primary hover:text-secondary transition"></i>
+                                </button>
+                                    <h2 class="text-xl text-primary flex">New Post</h2>
+                                </div>
+
+                                </div>
+
+                                <div class="px-10 w-full">
+                                    <div class="flex gap-2">
+                                        <i class="fa-solid fa-circle-user text-4xl mb-4 "></i>
+                                        <h2 class="items-center flex mb-4">lorem</h2>
+                                        <h2 class="text-gray-500 items-center flex mb-4">lorem@gmail.com</h2>
+                                    </div>
+                                    
+                                       <div class="w-full">
+                                        <textarea id="text-col" class="focus:outline-none w-full max-h-10 resize-none" type="text" name="" id="" placeholder="What's Up"></textarea>
+                                       </div>
+
+                                        <div class="w-full px-2 py-2">
+                                            <label for="media"><i class="fa-solid fa-camera cursor-pointer text-primary"></i></label>
+                                            <input type="file" class="hidden" id="media">
+                                            <button onclick="hashtag()">
+                                                <i class="fa-solid ml-2 fa-hashtag cursor-pointer text-primary"></i>
+                                            </button>
+                                        </div>
+
+                                <div class="border-t-2 border-primary px-10 py-4">
+                                    <div class="justify-center items-center flex">
+                                        <button class="justify-center items-center flex border border-primary rounded-full bg-primary pt-1 h-10 w-1/2 font-bold text-black hover:bg-transparent hover:border-secondary hover:text-secondary transition">POST</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Pop Up -->
+
+     <!-- Left Bar -->
+             <section id="sidebar" id="sidebar" class="fixed md:sticky w-full md:w-64 h-screen max-h-screen flex flex-col py-6 px-6 justify-items-start border-r border-primary bg-teritary space-y-6 
+                transition-all duration-300 z-40 lg:l overflow-x-hidden whitespace-nowrap overflow-y-auto">
+                <!-- Logo -->
+                 <div class="flex px-4">
+                    <img src="images/TwiiAhh Logo.svg" class="w-10/12" alt="">
+                 </div>
+
+                <!-- Date -->
+                 <div class="px-4 mt-4 flex">
+                    <h1>Monday, 1st January, 2025</h1>
+                 </div>
+
+                <!-- Link -->
+                 <div class="flex px-4 flex-col items-start space-y-8">
+                    <a class="text-xl hover:text-secondary transition flex items-center gap-5" href="index.html">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Home</span>
+                    </a>
+                    <a class="text-xl ml-0.5 hover:text-secondary transition flex items-center gap-6" href="bookmarks.html">
+                        <i class="fa-solid fa-bookmark"></i>
+                        <span>Bookmarks</span>
+                    </a>
+                    <a class="text-xl text-secondary transition flex items-center gap-6" href="profile.html">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a class="text-xl hover:text-secondary transition flex items-center gap-5" href="settings.html">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Settings</span>
+                    </a>
+                    <a class="text-xl hover:text-secondary transition flex items-center gap-5" href="credit.html">
+                        <i class="fa-regular fa-square-ellipsis"></i>
+                        <span>Credit</span>
+                    </a>
+                </div>
+
+                <!-- Post -->
+                 <div class="my-5">
+                    <button id="openModal" class="flex text-2xl bg-primary border border-primary justify-center p-2 w-52 rounded-full hover:text-secondary hover:border-secondary transition hover:bg-transparent uppercase" >
+                        Post
+                    </button>
+                 </div>
+             </section>
+      <!-- Left Bar -->
+
+    <!-- Profile Section -->
+    <main class="flex-1 w-full h-screen py-6 justify-end item end overflow-y-scroll">
+      <div class="w-11/12 mx-auto bg-teritary p-6 rounded-2xl shadow-md">
+
+        <!-- Tabs -->
+        <div class="flex gap-2 mb-6">
+          <button id="btn-view" onclick="showTab('view-tab')" class="bg-transparent border border-secondary text-black px-4 py-2 rounded-full hover:bg-transparent hover:border-secondary hover:text-secondary transition duration-300">View</button>
+          <button id="btn-edit" onclick="showTab('edit-tab')" class="bg-primary text-black border border-primary px-4 py-2 rounded-full hover:bg-transparent hover:border-secondary hover:text-secondary transition duration-300">Edit</button>
+        </div>
+
+        <!-- View Profile Tab -->
+<div id="view-tab">
+  <div class="flex items-center space-x-4">
+    <img src="./images/avatar.png" alt="Profile" class="w-20 h-20 rounded-full object-cover">
+    <div>
+      <div class="flex gap-2 items-center">
+        <h2 id="view-name" class="text-xl font-semibold text-gray-900">Lorem Ipsum</h2>
+        <h2 id="view-name" class="text-sm font-semibold text-gray-500">@lorem_ipsum</h2>
+      </div>
+      <div class="flex gap-2">
+        <p id="view-username" class="text-sm text-gray-600">They/Them</p>
+      <p id="view-username" class="text-sm text-gray-600">
+        Female
+        <i class="fa-solid fa-venus"></i>
+      </p>
+      </div>
+    </div>
+  </div>
+  <p id="view-bio" class="mt-4 text-sm text-gray-700">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui est voluptate doloremque atque doloribus quisquam libero tempora, asperiores ducimus harum similique reprehenderit tempore vitae reiciendis quibusdam expedita quaerat. Doloribus, repellendus?
+  </p>
+  <div class="mt-6 grid grid-cols-3 text-center text-sm text-gray-700">
+  <div>
+    <p class="font-bold text-lg">5</p>
+    <span>Posts</span>
+  </div>
+  <div class="cursor-pointer" onclick="toggleList('followers-list')">
+    <p id="followers-count" class="font-bold text-lg">102</p>
+    <span>Followers</span>
+  </div>
+  <div class="cursor-pointer" onclick="toggleList('following-list')">
+    <p id="following-count" class="font-bold text-lg">2</p>
+    <span>Following</span>
+  </div>
+</div>
+
+<!-- List followers & following -->
+<div class="mt-4 space-y-4 text-sm text-gray-700">
+  <div id="followers-list" class="hidden">
+  <strong class="block text-gray-800 mb-2 text-lg">Followers:</strong>
+  <div id="followers-container" class="space-y-4"></div>
+</div>
+<div id="following-list" class="hidden">
+  <strong class="block text-gray-800 mb-2 text-lg">Following:</strong>
+  <div id="following-container" class="space-y-4"></div>
+</div>
+</div>
+
+</div>
+
+
+
+<!-- Edit Profile Tab -->
+<div id="edit-tab" class="hidden px-5">
+  <form id="edit-form" class="space-y-4">
+    <!-- Single Info -->
+    <div class="space-x-4 w-full flex">
+      <div class="w-1/2">
+        <label class="block text-sm font-medium text-gray-700">First Name</label>
+        <input id="edit-name" type="text" class="mt-1 w-full px-4 py-2 border rounded-lg border-primary focus:outline-secondary" value="Lorem">
+      </div>
+      <div class="w-1/2">
+        <label class="block text-sm font-medium text-gray-700">Last Name</label>
+        <input id="edit-name" type="text" class="mt-1 w-full px-4 py-2 border rounded-lg border-primary focus:outline-secondary" value="Ipsum">
+      </div>
+    </div>
+    <!-- Single Info -->
+    <!-- Single Info -->
+    <div class="space-x-4 w-full flex">
+      <div class="w-full">
+        <label class="block text-sm font-medium text-gray-700">Gmail Address</label>
+        <input id="edit-name" type="text" class="mt-1 w-full px-4 py-2 border rounded-lg border-primary focus:outline-secondary" value="lorem@gmail.com">
+      </div>
+    </div>
+    <!-- Single Info -->
+    <!-- Single Info -->
+    <div class="space-x-4 w-full flex">
+      <div class="w-1/2">
+        <label class="block text-sm font-medium text-gray-700">Old Password</label>
+        <input id="edit-name" type="text" class="mt-1 w-full px-4 py-2 border rounded-lg border-primary focus:outline-secondary" value="">
+      </div>
+      <div class="w-1/2">
+        <label class="block text-sm font-medium text-gray-700">New Password</label>
+        <input id="edit-name" type="text" class="mt-1 w-full px-4 py-2 border rounded-lg border-primary focus:outline-secondary" value="">
+      </div>
+    </div>
+    <!-- Single Info -->
+     <!-- Single Info -->
+    <div class="space-x-4 w-full flex">
+      <div class="w-1/2">
+        <label class="block text-sm font-medium text-gray-700">Country</label>
+        <select name="" id="" class="mt-1 w-full px-4 py-2 border rounded-lg border-primary focus:outline-secondary">
+          <option value="Indonesia">Indonesia</option>
+          <option value="US">US</option>
+          <option value="UK">UK</option>
+          <option value="Russia">Rusia</option>
+          <option value="Jokowi">Jokowi</option>
+        </select>
+      </div>
+      <div class="w-1/2">
+        <label class="block text-sm font-medium text-gray-700">Phone</label>
+        <div class="w-full">
+          <input id="edit-name" type="text" class="mt-1 w-full px-4 py-2 border rounded-lg border-primary focus:outline-secondary" value="+62 888-8888-8888">
+        </div>
+      </div>
+    </div>
+    <!-- Single Info -->
+
+    <!-- Save Btn -->
+    <div>
+      <button type="submit" class="bg-primary text-black px-4 py-2 rounded-full border border-primary hover:bg-transparent hover:border-secondary hover:text-secondary transition duration-300">Simpan</button>
+    </div>
+  </form>
+</div>
+
+</div>
+
+ <!-- For You Tab -->
+                    <div class="flex flex-col justify-center items-center pb-48" id="forYou">
+                    <!-- Single Post -->
+                    <div class="mt-6 flex justify-center items-center w-full">
+                        <div class="border border-primary w-10/12 rounded-md p-3 shadow-md">
+                           <!-- User -->
+                             <div class="flex items-center px-5">
+                                <!-- Pfp -->
+                                <div>
+                                    <img src="images/avatar.png" class="w-10" alt="">
+                                </div>
+                                
+                                <!-- Username -->
+                                <div class="flex gap-1 text-md ml-3 justify-center items-center">
+                                    <p>
+                                        Lorem
+                                    </p>
+                                    <p class="text-gray-500 text-xs">
+                                        @lorem_test
+                                    </p>
+                                </div>
+                             </div>
+                            <!-- User -->
+
+                            <!-- Content -->
+                            <div class="mt-2 px-5">
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, rerum. Beatae laborum, et cupiditate cumque error voluptas autem minus praesentium!
+                                </p>
+                            </div>
+
+                            <!-- Interaction -->
+                             <div class="flex mt-4 mb-1 items-start justify-between gap-5 w-full px-5">
+                                <div class="flex gap-4">
+                                    <p class="cursor-pointer" onclick="toggleLike()">
+                                        <i class="fa-regular fa-heart text-black" id="likeIcon"></i>
+                                        <span id="likeCount">721</span>
+                                    </p>
+                                    <p class="cursor-pointer" onclick="toggleRepost()">
+                                        <i class="fa-solid fa-repeat" id="repostIcon"></i>
+                                    </p>
+                                </div>
+                                
+                                <div>
+                                    <p class="cursor-pointer" onclick="toggleSave()">
+                                    <i class="fa-regular fa-bookmark" id="saveIcon"></i>
+                                </p>
+                                </div>
+                             </div>
+
+                        </div>
+                    </div>
+                    <!-- Single Post End -->
+
+                    <!-- Single Post -->
+                    <div class="mt-6 flex justify-center items-center w-full">
+                        <div class="border border-primary w-10/12 rounded-md p-3 shadow-md">
+                           <!-- User -->
+                             <div class="flex items-center px-5">
+                                <!-- Pfp -->
+                                <div>
+                                    <img src="images/avatar.png" class="w-10" alt="">
+                                </div>
+                                
+                                <!-- Username -->
+                                <div class="flex gap-1 text-xs ml-3">
+                                    <p>
+                                        Lorem
+                                    </p>
+                                    <p class="text-gray-500">
+                                        @lorem_ipsum
+                                    </p>
+                                </div>
+                             </div>
+                            <!-- User -->
+
+                            <!-- Content -->
+                            <div class="mt-2 px-5">
+                                <!-- Pict -->
+                               <div class="flex gap-2">
+                                 <img src="images/products/product10.jpg" class="w-80 h-auto mb-2 border border-primary" alt="">
+                                 <div>
+                                    <img src="images/products/product10.jpg" class="w-40 h-auto mb-2 border border-primary" alt="">
+                                    <img src="images/products/product10.jpg" class="w-40 h-auto mb-2 border border-primary" alt="">
+                                 </div>
+                                 <div>
+                                    <img src="images/products/product10.jpg" class="w-40 h-auto mb-2 border border-primary" alt="">
+                                    <img src="images/products/product10.jpg" class="w-40 h-auto mb-2 border border-primary" alt="">
+                                 </div>
+                               </div>
+                               <!-- Caption -->
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, rerum. Beatae laborum, et cupiditate cumque error voluptas autem minus praesentium!
+                                </p>
+                            </div>
+
+                            <!-- Interaction -->
+                             <div class="flex mt-4 mb-1 items-start justify-between gap-5 w-full px-5">
+                                <div class="flex gap-4">
+                                    <p class="cursor-pointer" onclick="toggleLike()">
+                                        <i class="fa-regular fa-heart text-black" id="likeIcon"></i>
+                                        <span id="likeCount">721</span>
+                                    </p>
+                                    <p class="cursor-pointer" onclick="toggleRepost()">
+                                        <i class="fa-solid fa-repeat" id="repostIcon"></i>
+                                    </p>
+                                </div>
+                                
+                                <div>
+                                    <p class="cursor-pointer" onclick="toggleSave()">
+                                    <i class="fa-regular fa-bookmark" id="saveIcon"></i>
+                                </p>
+                                </div>
+                             </div>
+
+                        </div>
+                    </div>
+                    <!-- Single Post End -->
+
+                    <!-- Single Post -->
+                    <div class="mt-6 flex justify-center items-center w-full">
+                        <div class="border border-primary w-10/12 rounded-md p-3 shadow-md">
+                           <!-- User -->
+                             <div class="flex items-center px-5">
+                                <!-- Pfp -->
+                                <div>
+                                    <img src="images/avatar.png" class="w-10" alt="">
+                                </div>
+                                
+                                <!-- Username -->
+                                <div class="flex gap-1 text-xs ml-3">
+                                    <p>
+                                        Lorem
+                                    </p>
+                                    <p class="text-gray-500">
+                                        @lorem_ipsum
+                                    </p>
+                                </div>
+                             </div>
+                            <!-- User -->
+
+                            <!-- Content -->
+                            <div class="mt-2 px-5">
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Id quis dignissimos quod sequi perspiciatis eveniet distinctio. Magni dicta, et officiis ab commodi ducimus odit odio facilis a. Repudiandae error perspiciatis nulla voluptatum at alias, mollitia ipsum rem nam in officia quod natus architecto non sequi, reprehenderit numquam vitae ex qui!
+                                </p>
+                            </div>
+
+                            <!-- Interaction -->
+                             <div class="flex mt-4 mb-1 items-start justify-between gap-5 w-full px-5">
+                                <div class="flex gap-4">
+                                    <p class="cursor-pointer" onclick="toggleLike()">
+                                        <i class="fa-regular fa-heart text-black" id="likeIcon"></i>
+                                        <span id="likeCount">721</span>
+                                    </p>
+                                    <p class="cursor-pointer" onclick="toggleRepost()">
+                                        <i class="fa-solid fa-repeat" id="repostIcon"></i>
+                                    </p>
+                                </div>
+                                
+                                <div>
+                                    <p class="cursor-pointer" onclick="toggleSave()">
+                                    <i class="fa-regular fa-bookmark" id="saveIcon"></i>
+                                </p>
+                                </div>
+                             </div>
+
+                        </div>
+                    </div>
+                    <!-- Single Post End -->
+                    </div>
+
+        <!-- Settings Tab -->
+        <div id="settings-tab" class="hidden px-5">
+          <form class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Email</label>
+              <input type="email" class="mt-1 w-full px-4 py-2 border rounded-lg" value="yazid@example.com">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Password</label>
+              <input type="password" class="mt-1 w-full px-4 py-2 border rounded-lg" placeholder="••••••••">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Bahasa</label>
+              <select class="mt-1 w-full px-4 py-2 border rounded-lg">
+                <option selected>Indonesia</option>
+                <option>English</option>
+              </select>
+            </div>
+            <div>
+              <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700">Update</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="components/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | TwiiAhh</title>
+     <!-- Logo -->
+   <link rel="icon" href="images/TwiiAhh Logo 2.svg" type="image/svg+xml">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">   
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css">
+
+    <style>
+         .text-10px {
+            font-size: 10px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #CCFF02;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 24px; /* Rounded slider */
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: black;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%; /* Rounded circle */
+        }
+
+        /* Changes here to use secondary color for checked state */
+        input:checked + .slider {
+            background-color: #0768EA; /* Secondary color from your palette */
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #0768EA; /* Secondary color from your palette */
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(20px);
+            -ms-transform: translateX(20px);
+            transform: translateX(20px);
+        }
+    </style>
+</head>
+<body class="w-full overflow-y-hidden">
+
+    <!-- Navbar -->
+    <header class="w-full backdrop-blur-md bg-opacity-70">
+        <nav class="flex justify-center px-6 border-b border-primary py-4">
+
+            <!-- Search Bar -->
+           <div class="w-6/12 items-center justify-center">
+             <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+                    <i class="fas fa-search"></i>
+                </span>
+                    <input
+                    type="text"
+                    placeholder="Search..."
+                    class="w-full pl-10 pr-4 py-2 border border-primary rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition"
+                    />
+                </div>
+           </div>
+        </nav>
+    </header>
+
+        <div class="flex flex-row">
+
+            <!-- Burger -->
+             <button id="menu-toggle" class=" absolute top-4 left-4 z-50 p-2">
+                <i class="fas fa-bars text-primary text-2xl"></i>
+            </button>
+            <!-- Burger -->
+
+     <!-- Left Bar -->
+             <section id="sidebar" id="sidebar" class="fixed md:sticky w-full pb-20 md:pb-0 md:w-96 h-screen max-h-screen flex flex-col py-6 px-6 justify-items-start border-r border-primary bg-teritary space-y-6 
+                transition-all duration-300 z-40 lg:l overflow-x-hidden whitespace-nowrap overflow-y-auto">
+                <!-- Logo -->
+                 <div class="flex px-4">
+                    <img src="images/TwiiAhh Logo.svg" class="w-10/12" alt="">
+                 </div>
+
+                <!-- Date -->
+                 <div class="px-4 mt-4 flex">
+                    <h1>Monday, 1st January, 2025</h1>
+                 </div>
+
+                <!-- Link -->
+                 <div class="flex px-4 flex-col items-start space-y-8">
+                    <a class="text-xl hover:text-secondary transition flex items-center gap-5" href="index.html">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Home</span>
+                    </a>
+                    <a class="text-xl ml-0.5 hover:text-secondary transition flex items-center gap-6" href="bookmarks.html">
+                        <i class="fa-solid fa-bookmark"></i>
+                        <span>Bookmarks</span>
+                    </a>
+                    <a class="text-xl hover:text-secondary transition flex items-center gap-6" href="profile.html">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a class="text-xl text-secondary transition flex items-center gap-5" href="settings.html">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Settings</span>
+                    </a>
+                    <a class="text-xl hover:text-secondary transition flex items-center gap-5" href="credit.html">
+                        <i class="fa-regular fa-square-ellipsis"></i>
+                        <span>Credit</span>
+                    </a>
+                </div>
+             </section>
+            <!-- Left Bar -->
+
+    <!-- Setting Menu -->
+    <div class="w-full flex justify-center h-screen py-5">
+        <div class="w-full max-w-2xl h-auto shadow-lg pb-20 md:pb-20 overflow-y-scroll md:overflow-y-hidden">
+        <div class="p-6 border-b border-grayMedium flex items-center">
+            <div class="flex items-center space-x-2 mr-4">
+                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-black text-xl font-bold">A</div>
+                <h1 class="text-2xl font-semibold text-black">Settings</h1>
+            </div>
+        </div>
+
+        <div class="p-6">
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-black mb-4">General Settings</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-language text-primary text-xl"></i>
+                            <div>
+                                <p class="text-lg font-medium text-black">Language</p>
+                                <p class="text-sm text-grayText">Choose your preferred language.</p>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <select class="block appearance-none w-full bg-tertiary border border-grayMedium border-primary text-black py-2 px-4 pr-8 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-secondary focus:border-secondary cursor-pointer text-sm">
+                                <option>English (US)</option>
+                                <option>Bahasa Indonesia</option>
+                                <option>Español</option>
+                                <option>Français</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-grayText">
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-adjust text-primary text-xl"></i>
+                            <div>
+                                <p class="text-lg font-medium text-black">Dark Mode</p>
+                                <p class="text-sm text-grayText">Switch between light and dark themes.</p>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-black mb-4">Account Management</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-key text-primary text-xl"></i>
+                            <div>
+                                <p class="text-lg font-medium text-black">Change Password</p>
+                                <p class="text-sm text-grayText">Update your account password regularly.</p>
+                            </div>
+                        </div>
+                        <a href="profile.html" class="bg-primary border border-primary text-black px-4 py-2 rounded-md hover:bg-transparent hover:border-secondary hover:text-secondary text-sm transition">
+                            Change
+                        </a>
+                    </div>
+
+                    <div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-trash-alt text-red-500 text-xl"></i>
+                            <div>
+                                <p class="text-lg font-medium text-black">Delete Account</p>
+                                <p class="text-sm text-grayText">Permanently delete your account and data.</p>
+                            </div>
+                        </div>
+                        <button class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 text-sm">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </div>
+     <!-- Setting Menu -->
+
+     </div>
+
+     <script src="components/main.js"></script>
+
+</body>
+</html>
