@@ -7,7 +7,7 @@
 
     
   <!-- Logo -->
-   <link rel="icon" href="images/TwiiAhh Logo 2.svg" type="image/svg+xml">
+   <link rel="icon" href="{{ asset('images/TwiiAhh Logo 2.svg') }}" type="image/svg+xml">
     
     <!-- CSS -->    
     <style>
@@ -112,7 +112,7 @@
                 transition-all duration-300 z-40 lg:l overflow-x-hidden whitespace-nowrap overflow-y-auto">
                 <!-- Logo -->
                  <div class="flex px-4">
-                    <img src="images/TwiiAhh Logo.svg" class="w-10/12" alt="">
+                    <img src="{{ asset('images/TwiiAhh Logo.svg') }}" class="w-10/12" alt="">
                  </div>
 
                 <!-- Date -->

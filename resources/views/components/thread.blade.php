@@ -150,7 +150,7 @@
                                         <button class="cursor-pointer text-red-500 hover:text-red-700" type="submit">
                                             <i class="fa-solid fa-trash" id="deleteIcon"></i>
                                         </button>
-                                    </form>
+                                    </form>                                                                                                         
                                 @endif
                              </div>
 
