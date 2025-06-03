@@ -7,18 +7,30 @@
                 <div>
                     <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
                     <input type="text" id="name"  name="name" class="shadow appearance-none border border-primary rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-secondary" placeholder="Username">
+                    @error('name')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div>
                     <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
                     <input type="text" id="email"  name="email" class="shadow appearance-none border border-primary rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-secondary" placeholder="Gmail Address">
+                    @error('email')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div>
                     <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
                     <input type="password" id="password" name="password" class="shadow appearance-none border border-primary rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-secondary" placeholder="Password">
+                    @error('password')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div>
                     <label for="password_confirmation" class="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
                     <input type="password" id="password_confirmation" name="password_confirmation" class="shadow appearance-none border border-primary rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-secondary" placeholder="Confirm Password">
+                    @error('password_confirmation')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
                 <button type="submit" class="text-black border border-primary py-2 px-4 rounded focus:outline-none focus:ring-0 focus:bg-secondary w-full bg-primary hover:border-secondary hover:bg-transparent hover:text-secondary transition">
                     Sign Up

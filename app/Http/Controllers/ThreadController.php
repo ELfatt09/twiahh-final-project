@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\thread;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,9 +14,49 @@ class ThreadController extends Controller
      */
     public function index()
     {
-        $threads = thread::all();
+        $threads = thread::whereNull('parent_id');
         return view('threads.index', [
-            'threads' => thread::with('author', 'medias', 'likes')->latest()->get()
+            'threads' => $threads->with('author', 'replies', 'medias', 'likes', 'reposts')->latest()->get()
+        ]);
+    }
+
+    public function bookmarks()
+    {
+        $user = User::find(Auth::id());
+        $savedThreads = $user->threadSaves();
+        $threads = thread::whereNull('parent_id')->whereIn('id', $savedThreads->pluck('thread_id'));
+        return view('threads.index', [
+            'threads' => $threads->with('author', 'replies', 'medias', 'likes', 'reposts')->latest()->get()
+        ]);
+    }
+
+    public function following()
+    {
+        $user = User::find(Auth::id());
+        $followedUserIds = $user->follows()->pluck('follow_id');
+        $threads = thread::whereNull('parent_id')->whereIn('user_id', $followedUserIds);
+
+        return view('threads.index', [
+            'threads' => $threads->with('author', 'replies', 'medias', 'likes', 'reposts')->latest()->get()
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        if (!$request->has('search')) {
+            return redirect()->route('threads.index')->withErrors(['search' => 'Search term is required']);
+        }
+
+        $query = $request->search;
+        $threads = thread::whereNull('parent_id')->where(function ($query) use ($request) {
+            $query->where('body', 'like', '%' . $request->search . '%')
+                ->orWhereHas('author', function ($query) use ($request) {
+                    $query->where('name', 'like', '%' . $request->search . '%');
+                });
+        });
+
+        return view('threads.index', [
+            'threads' => $threads->with('author', 'replies', 'medias', 'likes', 'reposts')->latest()->get()
         ]);
     }
     /**
@@ -28,12 +69,16 @@ class ThreadController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'body' => 'required'
+            'body' => 'required',
+            'parent_id' => 'nullable|integer',
+            'repost_id' => 'nullable|integer'
         ]);
 
         thread::create([
             'body' => $request->body,
-            'user_id' => Auth::id()
+            'user_id' => Auth::id(),
+            'parent_id' => $request->parent_id,
+            'repost_id' => $request->repost_id,
         ]);
 
         return redirect()->back();
@@ -42,32 +87,28 @@ class ThreadController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(thread $thread)
+    public function show(int $thread)
     {
-        //
+        return view('threads.show', [
+            'thread' => thread::with('author', 'replies', 'medias', 'likes', 'reposts', 'repostedFrom')->findOrFail($thread)
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(thread $thread)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, thread $thread)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(thread $thread)
+    public function destroy(Request $request)
     {
-        //
+        $thread = thread::findOrFail($request->thread_id);
+        $thread->delete();
+        return redirect()->back();
     }
 }

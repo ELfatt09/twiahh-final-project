@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | TwiiAhh</title>
+     <!-- Logo -->
+   <link rel="icon" href="../images/TwiiAhh Logo 2.svg" type="image/svg+xml">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../style.css">   
+    
+    <style>
+        .text-10px {
+            font-size: 10px;
+        }
+    </style>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css">
+</head>
+<body class="bg-blue-100 flex items-center justify-center h-screen bg-cover bg-center" style="background-image: url(../images/bg/LBP.png); background-blend-mode:multiply;">
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden flex">
+        <div class="hidden lg:block relative" style="background-color: #0768EA;">
+            <img src="https://via.placeholder.com/400/ffffff/000000?Text=Gambar+Login" alt="Gambar Login" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 opacity-70" style="background-color: #010000;"></div>
+            <div class="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold">
+               
+            </div>
+        </div>
+
+        <div class="p-8 w-full md:w-96" style="background-color: #FFFFFF;">
+            <h2 class="text-2xl font-semibold text-gray-800">Login to Continue</h2>
+            <p class="text-gray-500 mb-6">Welcome Back</p>
+            <form class="space-y-4">
+                <div>
+                    <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username/Email</label>
+                    <input type="text" id="username" class="shadow appearance-none border border-primary rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-secondary" placeholder="Username or Gmail">
+                </div>
+                <div>
+                    <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                    <input type="password" id="password" class="shadow appearance-none border border-primary rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-secondary" placeholder="Password">
+                </div>
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center">
+                        <input type="checkbox" class="form-checkbox h-4 w-4 text-primary bg-primary from-primary">
+                        <span class="ml-2 text-gray-700 text-sm">Remember me</span>
+                    </label>
+                    <a href="#" class="text-secondary text-sm hover:underline">Forgot password?</a>
+                </div>
+                <button type="submit" class="text-black border border-primary py-2 px-4 rounded focus:outline-none focus:ring-0 focus:bg-secondary w-full bg-primary hover:border-secondary hover:bg-transparent hover:text-secondary transition">
+                    Login
+                </button>
+            </form>
+            <div class="mt-4 text-center text-gray-600">
+                <div class="flex flex-col justify-center items-center space-x-4 mt-2">
+                    <span class="flex justify-center my-4 border-b border-primary w-full"></span>
+                    <div class="text-2xl">
+                        <i class="fa-solid fa-phone text-primary hover:text-secondary transition"></i>
+                        <i class="ml-2 fa-brands fa-google text-primary hover:text-secondary transition"></i>
+                    </div>
+                </div>
+            </div>
+            <p class="mt-6 text-center text-gray-600 text-sm">
+                Not have an account yet? <a href="register.html" class="text-secondary hover:underline">Sign in here</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

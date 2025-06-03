@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ThreadResource\Pages;
 use App\Filament\Resources\ThreadResource\RelationManagers;
 use App\Models\Thread;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -25,13 +26,14 @@ class ThreadResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('body')
                     ->required(),
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('parent_id')
-                    ->numeric(),
-                Forms\Components\TextInput::make('repost_id')
-                    ->numeric(),
+                Forms\Components\Select::make('user_id')
+                    ->options(User::all()->pluck('email', 'id'))
+                    ->searchable()
+                    ->required(),
+                Forms\Components\Select::make('parent_id')
+                    ->options(fn(): array => Thread::whereNull('parent_id')->get()->pluck('id', 'id')->toArray()),
+                Forms\Components\Select::make('repost_id')
+                    ->options(fn(): array => Thread::whereNull('repost_id')->get()->pluck('id', 'id')->toArray()),
             ]);
     }
 
@@ -39,10 +41,18 @@ class ThreadResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->label('ID')
+                    ->sortable(),
+                
                 Tables\Columns\TextColumn::make('body')
-                    ->searchable(),
+                    ->searchable()
+                    ->limit(50),
                 Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
+                    ->label('Author')
+                    ->formatStateUsing(function (int $state): string {
+                        return User::find($state)?->email ?? '-';
+                    })
                     ->sortable(),
                 Tables\Columns\TextColumn::make('parent_id')
                     ->numeric()

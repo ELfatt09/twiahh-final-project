@@ -4,62 +4,44 @@ namespace App\Http\Controllers;
 
 use App\Models\threadSave;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ThreadSaveController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
      */
-    public function show(threadSave $threadSave)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(threadSave $threadSave)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, threadSave $threadSave)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(threadSave $threadSave)
+    public function store(Request $request)
     {
-        //
+    $userID = Auth::id();
+        $threadID = $request->thread_id;
+        $threadSave = threadSave::where('user_id', $userID)
+            ->where('thread_id', $threadID)
+            ->first();
+        if ($threadSave != null) {
+            $threadSave->delete();
+        } else {
+            threadSave::create([
+                'user_id' => $userID,
+                'thread_id' => $threadID,
+            ]);
+        }
+        return redirect()->route('threads.show', $threadID);
     }
 }

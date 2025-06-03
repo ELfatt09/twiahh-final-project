@@ -17,16 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
 
-        Schema::table('user_pfp_medias', function (Blueprint $table) {
-            $table->id();
-            $table->string('path');
-            $table->foreignId('thread_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps(); 
-        });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();

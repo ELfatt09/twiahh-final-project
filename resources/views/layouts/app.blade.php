@@ -34,16 +34,18 @@
 
             <!-- Search Bar -->
            <div class="w-6/12 items-center justify-center">
-             <div class="relative">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+             <form class="relative" action="{{ route('threads.search') }}" method="POST">
+                @csrf
+                <button type="submit" class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
                     <i class="fas fa-search"></i>
-                </span>
+                </button>
                     <input
                     type="text"
                     placeholder="Search..."
+                    name="search"
                     class="w-full pl-10 pr-4 py-2 border border-primary rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition"
                     />
-                </div>
+                </form>
            </div>
         </nav>
     </header>
@@ -64,7 +66,7 @@
                             <div class="mb-4 border-b-2 border-primary pb-5 w-full">
 
                                 <div class="flex items-center pt-4 px-10 gap-6">
-                                <button id="closeModal">
+                                <button onclick="closeModal()">
                                     <i class="fa-solid fa-right-from-bracket cursor-pointer text-xl text-primary hover:text-secondary transition"></i>
                                 </button>
                                     <h2 class="text-xl text-primary flex">New Post</h2>
@@ -75,14 +77,16 @@
                                 <form class="px-10 w-full" action="{{ route('threads.store') }}" method="post" enctype="multipart/form-data"a>
                                     @csrf
                                     @method('POST')
+                                    <input type="hidden" name="repost_id" id="repost_id" value="">
+                                    <input type="hidden" name="parent_id" id="parent_id" value="">
                                     <div class="flex gap-2">
                                         <i class="fa-solid fa-circle-user text-4xl mb-4 "></i>
                                         <h2 class="items-center flex mb-4">lorem</h2>
                                         <h2 class="text-gray-500 items-center flex mb-4">lorem@gmail.com</h2>
                                     </div>
                                     
-                                       <div class="w-full">
-                                        <textarea id="text-col" class="focus:outline-none w-full max-h-10 resize-none" type="text" name="body" id="" placeholder="What's Up"></textarea>
+                                       <div class="w-full focus:outline-none focus:border-none">
+                                            <textarea id="text-col" class="focus:outline-none focus:border-none outline-none border-none w-full max-h-10 resize-none" type="text" name="body" id="" placeholder="What's Up"></textarea>
                                        </div>
 
                                         <div class="w-full px-2 py-2">
@@ -113,43 +117,35 @@
 
                 <!-- Date -->
                  <div class="px-4 mt-4 flex">
-                    <h1>Monday, 1st January, 2025</h1>
+                    <h1 id="date">Monday, 1st January, 2025</h1>
                  </div>
 
                 <!-- Link -->
                  <div class="flex px-4 flex-col items-start space-y-8">
-                    <a class="text-xl text-secondary transition flex items-center gap-5" href="index.html">
+                    <a class="text-xl text-secondary transition flex items-center gap-5" href="{{ route('dashboard') }}">
                         <i class="fa-solid fa-house"></i>
                         <span>Home</span>
                     </a>
-                    <a class="text-xl ml-0.5 hover:text-secondary transition flex items-center gap-6" href="bookmarks.html">
+                    <a class="text-xl ml-0.5 hover:text-secondary transition flex items-center gap-6" href="{{ route('threads.bookmarks')}}">
                         <i class="fa-solid fa-bookmark"></i>
                         <span>Bookmarks</span>
                     </a>
-                    <a class="text-xl hover:text-secondary transition flex items-center gap-6" href="profile.html">
+                    <a class="text-xl hover:text-secondary transition flex items-center gap-6" href="{{ route('profile.edit')}}">
                         <i class="fa-solid fa-user"></i>
                         <span>Profile</span>
-                    </a>
-                    <a class="text-xl hover:text-secondary transition flex items-center gap-5" href="settings.html">
-                        <i class="fa-solid fa-gear"></i>
-                        <span>Settings</span>
-                    </a>
-                    <a class="text-xl hover:text-secondary transition flex items-center gap-5" href="credit.html">
-                        <i class="fa-regular fa-square-ellipsis"></i>
-                        <span>Credit</span>
                     </a>
                 </div>
 
                 <!-- Stats -->
                  <div class="px-3 py-2 text-base text-black space-y-1">
-                    <p>Posts: <span class="font-semibold text-secondary">5</span></p>
-                    <p>Followers: <span class="font-semibold text-secondary">102</span></p>
-                    <p>Following: <span class="font-semibold text-secondary">2</span></p>
+                    <p>Threads: <span class="font-semibold text-secondary">{{ Auth::user()->threads()->count() }}</span></p>
+                    <p>Followers: <span class="font-semibold text-secondary">{{ Auth::user()->followers()->count() }}</span></p>
+                    <p>Following: <span class="font-semibold text-secondary">{{  Auth::user()->follows()->count() }}</span></p>
                 </div>
 
                 <!-- Post -->
                  <div class="my-5">
-                    <button id="openModal" class="flex text-2xl bg-primary border border-primary justify-center p-2 w-52 rounded-full hover:text-secondary hover:border-secondary transition hover:bg-transparent uppercase" >
+                    <button onclick="openModal()" class="flex text-2xl bg-primary border border-primary justify-center p-2 w-52 rounded-full hover:text-secondary hover:border-secondary transition hover:bg-transparent uppercase focus:outline-none" >
                         Post
                     </button>
                  </div>
@@ -174,6 +170,11 @@
                                     Logout
                                 </button>
                             </form>
+                            @if (Auth::user()->is_admin == true or Auth::user()->is_admin == 1)
+                                <a class="border border-primary bg-transparent py-1 px-6 rounded-full hover:border-secondary hover:text-secondary transition" href="{{ route('filament.admin.pages.dashboard') }}">
+                                    Admin
+                                </a>
+                            @endif
                         @else
                             <a class="border border-primary bg-transparent py-1 px-6 rounded-full hover:border-secondary hover:text-secondary transition" href="{{   route('login') }}">
                                 Login
@@ -194,106 +195,35 @@
                     </div>
 
                         <!-- Trends -->
-                         <div class="">
-                            <h1 class="capitalize mb-4">Trends for you</h1>
-                            <div class="space-y-3">
-                                <!-- Single Trends -->
-                                <div class="flex items-center justify-between bg-white rounded-xl shadow p-4 w-full max-w-md border border-primary">
-                                <!-- Text Section -->
-                                <div class="flex flex-col">
-                                    <span class="text-xs text-black font-semibold mb-1">Space</span>
-                                    <p class="text-sm font-medium">Lunar photography improves the discovery of the moon</p>
-                                    <span class="text-xs text-secondary mt-2">10,094 people are Twiiting about this</span>
-                                </div>
-
-                                <!-- Image Section -->
-                                <div class="w-16 h-16 rounded-xl overflow-hidden ml-4 flex-shrink-0">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/220px-FullMoon2010.jpg" alt="moon" class="object-cover w-full h-full">
-                                </div>
-                                </div>
-                                <!-- Single Trends -->
-                                <!-- Single Trends -->
-                                <div class="flex items-center justify-between bg-white rounded-xl shadow p-4 w-full max-w-md border border-primary">
-                                <!-- Text Section -->
-                                <div class="flex flex-col">
-                                    <span class="text-xs text-black font-semibold mb-1">Space</span>
-                                    <p class="text-sm font-medium">Lunar photography improves the discovery of the moon</p>
-                                    <span class="text-xs text-secondary mt-2">10,094 people are Twiiting about this</span>
-                                </div>
-
-                                <!-- Image Section -->
-                                <div class="w-16 h-16 rounded-xl overflow-hidden ml-4 flex-shrink-0">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/220px-FullMoon2010.jpg" alt="moon" class="object-cover w-full h-full">
-                                </div>
-                                </div>
-                                <!-- Single Trends -->
-                            </div>
-                         </div>
 
                          <!-- Who to Follow -->
                           <div class="mb-6">
                             <h1 class="mb-4">Who to Follow</h1>
                             <div class="space-y-4">
+                                @foreach ($recommendedUsers as $user)
                                 <!-- Single User -->
-                                 <div class="flex space-x-8">
-                                    <div class=" flex space-x-3">
-                                        <img src="images/avatar.png" class="w-12 h-auto" alt="">
-
-                                   <div class="flex flex-col items-center">
-                                        <h1 class="text-sm">Lorem Ipsum</h1>
-                                        <p class="text-10px  mt-4 mr-4 text-gray-500">@lorem_ipsum</p>
-                                   </div>
-                                    </div>
-
+                                <div class="flex items-center space-x-2 justify-between">
+                                    <a class="flex flex-col" href="{{ route('profile.show', $user->id) }}">
+                                        <h1 class="text-base font-semibold">{{ $user->name }}</h1>
+                                        <p class="text-xs mt-1 text-gray-500">{{ $user->email }}</p>
+                                    </a>
                                     <div>
-                                        <button id="followBtn" class="text-sm text-secondary focus:outline-none focus:ring-0" onclick="toggleFollow()">
-                                            Follow
-                                        </button>
+                                        <form method="POST" action="{{ route('profile.follow', $user->id ?: Auth::user()->id) }}" class="flex items-center space-x-4">
+                                            @csrf
+                                            <input type="hidden" name="follow_id" value="{{ $user->id }}">
+                                            <button type="submit" class="text-sm {{ $user->isFollowedByUser(Auth::id()) ? 'text-gray-500' : 'text-secondary' }} focus:outline-none transition ease-in-out duration-150 hover:text-secondary">
+                                                {{ $user->isFollowedByUser(Auth::id()) ? 'Unfollow' : 'Follow' }}
+                                            </button>
+                                        </form>
                                     </div> 
-
-                                 </div>
+                                </div>
                                 <!-- Single User -->
-                                 <div class="flex space-x-8">
-                                    <div class=" flex space-x-3">
-                                        <img src="images/avatar.png" class="w-12 h-auto" alt="">
-
-                                   <div class="flex flex-col items-center">
-                                        <h1 class="text-sm">Lorem Ipsum</h1>
-                                        <p class="text-10px mt-4 mr-4 text-gray-500">@lorem_ipsum</p>
-                                   </div>
-                                    </div>
-
-                                    <div>
-                                        <button id="followBtn" class="text-sm text-secondary focus:outline-none focus:ring-0" onclick="toggleFollow()">
-                                            Follow
-                                        </button>
-                                    </div> 
-
-                                 </div>
-                                <!-- Single User -->
-                                 <div class="flex space-x-8">
-                                    <div class=" flex space-x-3">
-                                        <img src="images/avatar.png" class="w-12 h-auto" alt="">
-
-                                   <div class="flex flex-col items-center">
-                                        <h1 class="text-sm">Lorem Ipsum</h1>
-                                        <p class="text-10px mt-4 mr-4 text-gray-500">@lorem_ipsum</p>
-                                   </div>
-                                    </div>
-
-                                    <div>
-                                        <button id="followBtn" class="text-sm text-secondary focus:outline-none focus:ring-0" onclick="toggleFollow()">
-                                            Follow
-                                        </button>
-                                    </div> 
-
-                                 </div>
+                                @endforeach
                             </div>
                           </div>
                     </section>
                 <!-- Right Bar -->
 
-                @vite('resources/js/components.js')
-
 </body>
+                @vite('resources/js/components.js')
 </html>

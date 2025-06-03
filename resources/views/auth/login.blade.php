@@ -7,10 +7,16 @@
                 <div>
                     <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Username/Email</label>
                     <input type="text" id="email"  name="email" class="shadow appearance-none border border-primary rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-secondary" placeholder="Username or Gmail">
+                    @error('email')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div>
                     <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
                     <input type="password" id="password" name="password" class="shadow appearance-none border border-primary rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-secondary" placeholder="Password">
+                    @error('password')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="flex items-center justify-between">
                     <label class="flex items-center">
@@ -33,7 +39,7 @@
                 </div>
             </div>
             <p class="mt-6 text-center text-gray-600 text-sm">
-                Not have an account yet? <a href="{{ route('register') }}" class="text-secondary hover:underline">Sign in here</a>
+                Not have an account yet? <a href="{{ route('register') }}" class="text-secondary hover:underline">Sign up here</a>
             </p>
         </div>
 </x-guest-layout>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\follow;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FollowController extends Controller
 {
@@ -28,7 +29,21 @@ class FollowController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $userId = Auth::id();
+        if ($userId == $request->follow_id) {
+            return redirect()->back();
+        }
+
+        $follow = follow::where('user_id', $userId)->where('follow_id', $request->follow_id)->first();
+        if ($follow) {
+            $follow->delete();
+        } else {
+            follow::create([
+                'user_id' => $userId,
+                'follow_id' => $request->follow_id,
+            ]);
+        }
+        return redirect()->back();
     }
 
     /**

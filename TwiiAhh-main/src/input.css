@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+
+@theme {
+  --color-primary: #CCFF02;
+  --color-secondary: #0768EA;
+  --color-teritary: #FFFFFF;
+  --color-black: #010000;
+}
+
+@font-face {
+  font-family: 'SaintRegus';
+  src: url('../public/fonts/SaintRegus.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+

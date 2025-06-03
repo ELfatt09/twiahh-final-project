@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | TwiiAhh</title>
+     <!-- Logo -->
+   <link rel="icon" href="../images/TwiiAhh Logo 2.svg" type="image/svg+xml">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../style.css">   
+    
+    <style>
+        .text-10px {
+            font-size: 10px;
+        }
+    </style>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css">
+</head>
+<body class="bg-blue-100 flex items-center justify-center h-screen bg-cover bg-center" style="background-image: url(../images/bg/LBP.png); background-blend-mode: multiply;">
+    <div class="bg-white rounded-xl shadow-xl overflow-hidden flex">
+        <div class="p-8 w-full md:w-96" style="background-color: #FFFFFF;">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Create New Account</h2>
+            <form class="space-y-4">
+                <div>
+                    <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Full Name</label>
+                    <input type="text" id="name" class="shadow appearance-none border border-primary rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-secondary" placeholder="Your Full name">
+                </div>
+                <div>
+                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Gmail</label>
+                    <input type="email" id="email" class="shadow appearance-none border border-primary rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-secondary" placeholder="Gmail Address">
+                </div>
+                <div>
+                    <label for="new-password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                    <input type="password" id="new-password" class="shadow appearance-none border border-primary rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-secondary" placeholder="New Password">
+                </div>
+                <div>
+                    <label for="confirm-password" class="block text-gray-700 text-sm font-bold mb-2">Password Confirm</label>
+                    <input type="password" id="confirm-password" class="shadow appearance-none border border-primary rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-secondary" placeholder="Confirm Password">
+                </div>
+                <button type="submit" class="text-black border border-primary py-2 px-4 rounded focus:outline-none focus:ring-0 focus:bg-primary w-full bg-primary hover:border-primary hover:bg-transparent hover:text-primary transition">
+                    Sign Up
+                </button>
+            </form>
+            <p class="mt-6 text-center text-gray-600 text-sm">
+                Already have an account? <a href="login.html" class="text-secondary hover:underline">Login here</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

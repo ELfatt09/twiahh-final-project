@@ -1,4 +1,4 @@
- function active(element) {
+   function active(element) {
     // Ubah gaya tab aktif
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.classList.remove('border-primary');
@@ -153,8 +153,8 @@ let followers = [
   }
 
   function updateCounts() {
-    document.getElementById("followers-count").textContent = followers.length;
-    document.getElementById("following-count").textContent = following.length;
+    // document.getElementById("followers-count").textContent = {{ $user ? $user->followers->count() : Auth::user()->followers->count() }};
+    // document.getElementById("following-count").textContent = {{ $user ? $user->follows->count() : Auth::user()->following->count() }};
   }
 
   function renderList(containerId, dataArray, type) {
@@ -263,18 +263,46 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 //   Profile
 
-    document.addEventListener('DOMContentLoaded',() => {
-            const openModalBtn = document.getElementById('openModal');
-            const closeModalBtn = document.getElementById('closeModal');
-            const modal = document.getElementById('modal');
+    function openModal(parentID = null, repostID = null) {
+      const modal = document.getElementById('modal')
+      const parent_id_input = document.getElementById('parent_id')
+      const repost_id_input = document.getElementById('repost_id')
+      modal.classList.remove('hidden')
+      parent_id_input.value = parentID
+      repost_id_input.value = repostID
+}
+    function closeModal() {
+      const modal = document.getElementById('modal')
+      const parent_id_input = document.getElementById('parent_id')
+      const repost_id_input = document.getElementById('repost_id')
+      modal.classList.add('hidden')
+      parent_id_input.value = null
+      repost_id_input.value = null
+}
+    
+window.openModal = openModal
+window.closeModal = closeModal
 
-            openModalBtn.addEventListener('click',()=>{
-                modal.classList.remove('hidden');
-            })
-            closeModalBtn.addEventListener('click',()=>{
-                modal.classList.add('hidden');
-            })
-        })
+    function openModalReply(parentID = null, repostID = null) {
+      const modal = document.getElementById('modal')
+      const parent_id_input = document.getElementById('parent_id')
+      const repost_id_input = document.getElementById('repost_id')
+      modal.classList.remove('hidden')
+      parent_id_input.value = parentID
+      repost_id_input.value = repostID
+}
+    function closeModalReply() {
+      const modal = document.getElementById('modalReply')
+      const parent_id_input = document.getElementById('parent_id')
+      const repost_id_input = document.getElementById('repost_id')
+      modal.classList.add('hidden')
+      parent_id_input.value = null
+      repost_id_input.value = null
+}
+    
+window.openModalReply = openModalReply
+window.closeModalReply = closeModalReply
+window.showTab = showTab
 
         function hashtag() {
           const textarea = document.getElementById("text-col");
@@ -283,4 +311,18 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         document.documentElement.classList.remove('dark');
-    localStorage.setItem('theme', 'light');
+localStorage.setItem('theme', 'light');
+    
+document.addEventListener("DOMContentLoaded", function () {
+  const dateElement = document.getElementById("date");
+  
+  function updateDate() {
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Jakarta'};
+    const formattedDate = now.toLocaleDateString('en-US', options);
+    dateElement.textContent = formattedDate;
+  }
+
+  updateDate();
+});
+

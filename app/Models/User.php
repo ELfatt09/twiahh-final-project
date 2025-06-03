@@ -7,6 +7,7 @@ namespace App\Models;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -52,7 +53,7 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-       return $this->email === 'admin@admin.com';
+       return $this->is_admin == true or $this->is_admin == 1;
     }
 
     public function pfp()
@@ -60,18 +61,28 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasOne(userPfpMedia::class);
     }
 
+    public function isFollowedByUser(int $userId): bool
+    {
+        return $this->followers()->where('user_id', $userId)->count() > 0;
+    }
+
+public function followedThreads()
+{
+    return $this->belongsToMany(thread::class, 'follows', 'user_id', 'follow_id' , 'thread_id');
+}
+
     public function threads()
     {
         return $this->hasMany(thread::class);
     }
     public function threadSaves()
     {
-        return $this->hasMany(threadSave::class);
+        return $this->hasMany(ThreadSave::class);
     }
 
-    public function savedThreads()
+    public function savedThreads(): HasMany
     {
-        return $this->threadSaves()->with('thread');
+        return $this->threadSaves()->thread();
     }
 
     public function threadLikes()
@@ -82,5 +93,15 @@ class User extends Authenticatable implements FilamentUser
     public function likedThreads()
     {
         return $this->threadLikes()->with('thread');
+    }
+
+    public function follows()
+    {
+        return $this->hasMany(follow::class, 'user_id');
+    }
+
+    public function followers()
+    {
+        return $this->hasMany(follow::class, 'follow_id');
     }
 }

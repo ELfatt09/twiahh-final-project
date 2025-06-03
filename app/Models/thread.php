@@ -11,7 +11,19 @@ class thread extends Model
     protected $fillable = [
         'body',
         'user_id',
+        'parent_id',
+        'repost_id',
     ];
+
+    public function isLikedBy(User $user): bool
+    {
+        return $this->likes()->where('user_id', $user->id)->exists();
+    }
+
+    public function isBookMarkedBy(User $user): bool
+    {
+        return $this->saves()->where('user_id', $user->id)->exists();
+    }
 
     public function author(): BelongsTo
     {

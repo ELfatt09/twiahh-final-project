@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class follow extends Model
 {
     protected $fillable = [
-        'follower_id',
-        'following_id',
+        'user_id',
+        'follow_id',
     ];
 
     public function follower(): BelongsTo
