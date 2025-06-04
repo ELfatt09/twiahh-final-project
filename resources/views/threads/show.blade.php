@@ -3,7 +3,7 @@
 
                     <div class="w-full flex flex-row px-4">
                    
-                    <div class="mt-4 flex flex-col w-full gap-2">
+                    <div class="mt-4 flex flex-col w-full ps-8 gap-2">
 
                     @foreach ($thread->replies as $thread)
                      <div class="px-0 md:px-12 relative">
@@ -34,12 +34,34 @@
 
                             <!-- Interaction -->
                              <div class="flex mt-4 mb-1 items-start justify-between gap-5 w-full px-5">
-                                <div class="flex gap-4">
-                                    <p class="cursor-pointer" onclick="toggleLike()">
-                                        <i class="fa-regular fa-heart text-black" id="likeIcon"></i>
-                                        <span id="likeCount">{{ $thread->likes->count() }}</span>
+<div class="flex gap-4">
+                                    <form action="{{ route('thread.like', $thread->id) }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="thread_id" value="{{ $thread->id }}">
+                                        <button class="cursor-pointer" type="submit">
+                                            @if($thread->isLikedBy(auth()->user()))
+                                                <i class="fa-solid fa-heart text-primary" id="likeIcon"></i>
+                                            @else
+                                                <i class="fa-regular fa-heart text-black" id="likeIcon"></i>
+
+                                            @endif                                            
+                                            <span id="likeCount">{{ $thread->likes->count() }}</span>
+                                        </button>
+                                    </form>
+                                    <p class="cursor-pointer" onclick="openModal(null, {{ $thread->id }})">
+                                        <i class="fa-solid fa-repeat" id="repostIcon"></i>
                                     </p>
                                 </div>
+                                @if(Auth::user()->is_admin or Auth::user()->id == $thread->user_id)
+                                    <form action="{{ route('threads.destroy') }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="thread_id" value="{{ $thread->id }}">
+                                        <button class="cursor-pointer text-red-500 hover:text-red-700" type="submit">
+                                            <i class="fa-solid fa-trash" id="deleteIcon"></i>
+                                        </button>
+                                    </form>                                                                                                         
+                                @endif
 
         
                              </div>

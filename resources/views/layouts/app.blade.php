@@ -47,6 +47,7 @@
                     />
                 </form>
            </div>
+           
         </nav>
     </header>
 
@@ -81,8 +82,8 @@
                                     <input type="hidden" name="parent_id" id="parent_id" value="">
                                     <div class="flex gap-2">
                                         <i class="fa-solid fa-circle-user text-4xl mb-4 "></i>
-                                        <h2 class="items-center flex mb-4">lorem</h2>
-                                        <h2 class="text-gray-500 items-center flex mb-4">lorem@gmail.com</h2>
+                                        <h2 class="items-center flex mb-4">{{  Auth::user()->name}}</h2>
+                                        <h2 class="text-gray-500 items-center flex mb-4">{{ Auth::user()->email }}</h2>
                                     </div>
                                     
                                        <div class="w-full focus:outline-none focus:border-none">
@@ -120,17 +121,40 @@
                     <h1 id="date">Monday, 1st January, 2025</h1>
                  </div>
 
+                 <div class="flex items-start justify-start gap-3 w-full mt-4">
+                        @auth
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button class="border border-primary bg-transparent py-1 px-6 rounded-full hover:border-secondary hover:text-secondary transition" type="submit">
+                                    Logout
+                                </button>
+                            </form>
+                            @if (Auth::user()->is_admin == true or Auth::user()->is_admin == 1)
+                                <a class="border border-primary bg-transparent py-1 px-6 rounded-full hover:border-secondary hover:text-secondary transition" href="{{ route('filament.admin.pages.dashboard') }}">
+                                    Admin
+                                </a>
+                            @endif
+                        @else
+                            <a class="border border-primary bg-transparent py-1 px-6 rounded-full hover:border-secondary hover:text-secondary transition" href="{{   route('login') }}">
+                                Login
+                            </a>
+                            <a class="max-w-full flex border bg-primary border-primary hoverbg-transparent py-1 px-4 rounded-full hover:border-secondary hover:text-secondary transition hover:bg-transparent" href="{{  route('register') }}">
+                                Sign Up
+                            </a>
+                        @endauth
+                    </div>
+
                 <!-- Link -->
                  <div class="flex px-4 flex-col items-start space-y-8">
-                    <a class="text-xl text-secondary transition flex items-center gap-5" href="{{ route('dashboard') }}">
+                    <a class="text-xl {{ request()->routeIs('dashboard') ? 'text-secondary' : 'hover:text-secondary' }} transition flex items-center gap-5" href="{{ route('dashboard') }}">
                         <i class="fa-solid fa-house"></i>
                         <span>Home</span>
                     </a>
-                    <a class="text-xl ml-0.5 hover:text-secondary transition flex items-center gap-6" href="{{ route('threads.bookmarks')}}">
+                    <a class="text-xl ml-0.5 {{ request()->routeIs('threads.bookmarks') ? 'text-secondary' : 'hover:text-secondary' }} transition flex items-center gap-6" href="{{ route('threads.bookmarks')}}">
                         <i class="fa-solid fa-bookmark"></i>
                         <span>Bookmarks</span>
                     </a>
-                    <a class="text-xl hover:text-secondary transition flex items-center gap-6" href="{{ route('profile.edit')}}">
+                    <a class="text-xl {{ request()->routeIs('profile.edit') ? 'text-secondary' : 'hover:text-secondary' }} transition flex items-center gap-6" href="{{ route('profile.edit')}}">
                         <i class="fa-solid fa-user"></i>
                         <span>Profile</span>
                     </a>
@@ -162,28 +186,7 @@
                 <!-- Right Bar -->
                     <section class="hidden md:flex w-0 md:w-96 h-full max-h-screen overflow-y-scroll text-lg flex-col pb-20 px-6 border-l border-primary bg-teritary space-y-6" >
                          <!-- Auth Button / Account -->
-                    <div class="flex items-center justify-center gap-3 w-full mt-4">
-                        @auth
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button class="border border-primary bg-transparent py-1 px-6 rounded-full hover:border-secondary hover:text-secondary transition" type="submit">
-                                    Logout
-                                </button>
-                            </form>
-                            @if (Auth::user()->is_admin == true or Auth::user()->is_admin == 1)
-                                <a class="border border-primary bg-transparent py-1 px-6 rounded-full hover:border-secondary hover:text-secondary transition" href="{{ route('filament.admin.pages.dashboard') }}">
-                                    Admin
-                                </a>
-                            @endif
-                        @else
-                            <a class="border border-primary bg-transparent py-1 px-6 rounded-full hover:border-secondary hover:text-secondary transition" href="{{   route('login') }}">
-                                Login
-                            </a>
-                            <a class="max-w-full flex border bg-primary border-primary hoverbg-transparent py-1 px-4 rounded-full hover:border-secondary hover:text-secondary transition hover:bg-transparent" href="{{  route('register') }}">
-                                Sign Up
-                            </a>
-                        @endauth
-                    </div>
+        
 
                     <div class="flex justify-center items-center gap-4 hidden">
                         <img src="images/avatar.png" class="w-12" alt="">

@@ -16,6 +16,11 @@
 
         <!-- Content -->
         <div class="mt-2 px-5">
+            @if ($thread->media != null)
+            <div class="mt-3 mb-2 w-full flex justify-center items-center bg-gray-200 rounded-md">
+                <img src="{{ asset('storage/' . $thread->media->path) }}" class="h-full max-h-80 w-auto object-cover">
+            </div>
+            @endif
             <p>
                 {{ $thread->body }}
             </p>
@@ -37,6 +42,11 @@
 
                     <!-- Content -->
                     <div class="mt-2 px-5">
+                                    @if ($thread->repostedFrom->media != null)
+            <div class="mt-3 mb-2 w-full flex justify-center items-center bg-gray-200 rounded-md">
+                <img src="{{ asset('storage/' . $thread->repostedFrom->media->path) }}" class="h-full max-h-80 w-auto object-cover">
+            </div>
+            @endif
                         <p>
                             {{ $thread->repostedFrom->body }}
                         </p>

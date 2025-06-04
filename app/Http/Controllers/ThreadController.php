@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\thread;
+use App\Models\threadMedia;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class ThreadController extends Controller
     {
         $threads = thread::whereNull('parent_id');
         return view('threads.index', [
-            'threads' => $threads->with('author', 'replies', 'medias', 'likes', 'reposts')->latest()->get()
+            'threads' => $threads->with('author', 'replies', 'media', 'likes', 'reposts')->latest()->get()
         ]);
     }
 
@@ -26,7 +27,7 @@ class ThreadController extends Controller
         $savedThreads = $user->threadSaves();
         $threads = thread::whereNull('parent_id')->whereIn('id', $savedThreads->pluck('thread_id'));
         return view('threads.index', [
-            'threads' => $threads->with('author', 'replies', 'medias', 'likes', 'reposts')->latest()->get()
+            'threads' => $threads->with('author', 'replies', 'media', 'likes', 'reposts')->latest()->get()
         ]);
     }
 
@@ -37,7 +38,7 @@ class ThreadController extends Controller
         $threads = thread::whereNull('parent_id')->whereIn('user_id', $followedUserIds);
 
         return view('threads.index', [
-            'threads' => $threads->with('author', 'replies', 'medias', 'likes', 'reposts')->latest()->get()
+            'threads' => $threads->with('author', 'replies', 'media', 'likes', 'reposts')->latest()->get()
         ]);
     }
 
@@ -56,7 +57,7 @@ class ThreadController extends Controller
         });
 
         return view('threads.index', [
-            'threads' => $threads->with('author', 'replies', 'medias', 'likes', 'reposts')->latest()->get()
+            'threads' => $threads->with('author', 'replies', 'media', 'likes', 'reposts')->latest()->get()
         ]);
     }
     /**
@@ -69,17 +70,25 @@ class ThreadController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'media' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
             'body' => 'required',
             'parent_id' => 'nullable|integer',
             'repost_id' => 'nullable|integer'
         ]);
 
-        thread::create([
+        $thread = thread::create([
             'body' => $request->body,
             'user_id' => Auth::id(),
             'parent_id' => $request->parent_id,
             'repost_id' => $request->repost_id,
         ]);
+        if ($request->hasFile('media')) {
+            $path = $request->file('media')->store('uploads/images', 'public');
+            threadMedia::create([
+                'thread_id' => $thread->id,
+                'path' => $path,
+            ]);
+    }
 
         return redirect()->back();
     }
@@ -90,7 +99,7 @@ class ThreadController extends Controller
     public function show(int $thread)
     {
         return view('threads.show', [
-            'thread' => thread::with('author', 'replies', 'medias', 'likes', 'reposts', 'repostedFrom')->findOrFail($thread)
+            'thread' => thread::with('author', 'replies', 'media', 'likes', 'reposts', 'repostedFrom')->findOrFail($thread)
         ]);
     }
 

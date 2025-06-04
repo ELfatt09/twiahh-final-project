@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class thread extends Model
 {
@@ -30,9 +31,9 @@ class thread extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function medias(): HasMany
+    public function media(): HasOne
     {
-        return $this->hasMany(threadMedia::class);
+        return $this->hasOne(threadMedia::class);
     }
 
     public function likes(): HasMany
